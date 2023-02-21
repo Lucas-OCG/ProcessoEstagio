@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang=”pt-br” xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Processo Estágio</title>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/cadastrarVendedor">Cadastrar vendedor</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/vendedores">Listar vendedores</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="container" style="width: 60rem">
+		<br>
+		<div class="card">
+			<div class="card-header card-title bg-primary text-center">
+				<h3 style="color: white">Lista de vendedores cadastrados</h3>
+			</div>
+			<div class="card-body">
+				<table class="table table-hover table-responsive w-auto table-striped">
+					<thead>
+						<tr>
+							<th scope="col">CPF/CNPJ:</th>
+							<th scope="col">Nome:</th>
+							<th scope="col">Localização:</th>
+							<th scope="col">Sobre:</th>
+							<th scope="col">Ações:</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="vendedor: ${vendedores}">
+							<td><span th:text="${vendedor.cpfCnpj}"></span></td>
+							<td><span th:text="${vendedor.nome}"></span></td>
+							<td><span th:text="${vendedor.localizacao}"></span></td>
+							<td><span th:text="${vendedor.sobre}"></span></td>
+							<td><a th:href="${(#mvc.url('VC#deletarVendedor').arg(0, vendedor.cpfCnpj)).build()}"><button type="button" class="btn btn-danger">Excluir</button></a></td>
+							<td><a th:href="${(#mvc.url('VC#editarVendedor').arg(0, vendedor.cpfCnpj)).build()}"><button type="button" class="btn btn-primary">Editar</button></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div style="height: 100px;"></div>
+
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+		crossorigin="anonymous">
+	</script>
+</body>
+</html>
